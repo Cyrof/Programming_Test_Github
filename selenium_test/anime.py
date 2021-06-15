@@ -13,9 +13,8 @@ def close_Tab():
         brower.switch_to.window(windows[0])
 
 
-username = "cyrof"
-password = "B@sketba1l"
-counter = 0
+username = "****"
+password = "********"
 
 
 def click():
