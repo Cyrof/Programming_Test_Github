@@ -18,3 +18,4 @@ token = f.encrypt(b"Secret message")
 print(token)
 print(f.decrypt(token))
 print(key)
+
