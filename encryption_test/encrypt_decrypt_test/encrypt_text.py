@@ -1,5 +1,4 @@
 from cryptography.fernet import Fernet
-import os.path
 
 '''
 # generate key
@@ -10,9 +9,6 @@ with open('filekey.key', 'wb') as f:
     f.write(key)
     f.close()
 '''
-
-print(os.path.exists("./encryption_test/encrypt_decrypt_test/pass.txt"))
-
 
 # open filekey file to get generated key
 with open('./encryption_test/encrypt_decrypt_test/filekey.key', 'rb') as f:
