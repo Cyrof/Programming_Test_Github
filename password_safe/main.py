@@ -71,7 +71,7 @@ def menu():
         if option != 3:
             choice(option)
         else:
-            break
+            break 
     
 
 if __name__ == "__main__":
