@@ -28,37 +28,42 @@ def pass_key(master_pass):
 
     key = base64.urlsafe_b64encode(kdf.derive(master_pass.encode('utf-8')))
     master_key = Fernet(key)
+    print(key)
 
-# prompt user for new text, encrypt and store in file
 
+# functions to encrypt and decrypt
+def encrypt(text):
+    encrypted = master_key.encrypt(text)
 
-def new_text():
-    text = input("Enter text: ")
-    text = master_key.encrypt(text.encode('utf-8'))
-    with open('./encryption_test/cryptography/text.txt', 'ab') as f:
-        f.write(b"\n" + text)
+    with open('./encryption_test/cryptography/text.txt', 'ab+') as f:
+        f.write(encrypted + b"\n")
         f.close()
 
-# decrypt and show user content of file
 
-
-def view():
+def decrypt():
     with open('./encryption_test/cryptography/text.txt', 'rb+') as f:
-        content = f.read()[65:]
-        #decrypted = master_key.decrypt(content)
-        print(type(content))
+        content = f.read()
+    decrypted = master_key.decrypt(content)
+    print(decrypted)
+    
+
+
+# function to prompt user to enter text
+def text():
+    user_text = input("Enter text: ").encode()
+    print("Saving to file.")
+    encrypt(user_text)
+    # write(user_text)
 
 
 # choice function
 def choice(opt):
     if opt == 1:
-        new_text()
+        text()
     elif opt == 2:
-        view()
+        decrypt()
 
 # menu function
-
-
 def menu():
     while True:
         print("\nEnter text\t[1]")
@@ -75,16 +80,17 @@ def menu():
 def checker(master_pass):
     encrypted_pass = hashlib.sha256(master_pass.encode()).hexdigest()
 
-    with open('./encryption_test/cryptography/text.txt', 'r+') as f:
-        line = f.readlines()
-        print(line)
-        print(encrypted_pass)
+    try:
+        with open('./encryption_test/cryptography/masterpass.txt', 'r+') as f:
+            line = f.readlines()
 
-    if encrypted_pass == line[0].replace('\n', ''):
-        key = pass_key(master_pass)
-        menu()
-    else:
-        print("Wrong master password!")
+        if encrypted_pass == line[0].replace('\n', ''):
+            key = pass_key(master_pass)
+            menu()
+        else:
+            print("Wrong master password!")
+    except IndexError:
+        print("Nothing in file")
 
 
 # user input to prompt user for master pass
