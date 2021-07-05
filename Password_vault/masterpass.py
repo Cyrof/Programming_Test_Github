@@ -18,7 +18,7 @@ class Masterpass():
         with open('./keys.key', 'w+') as f:
             f.write(hashCheck + "\n")
             f.close()
-        print("Saving hash")
+        print("\nSaving hash")
         
 
     def keyForEncryption(self, password):
