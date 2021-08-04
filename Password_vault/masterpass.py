@@ -1,13 +1,13 @@
 import hashlib
 import os
 import base64
-from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
-
+# class to create master ps, ps hash and sha 256 hash for cipher
 class Masterpass():
 
+    # default constructor
     def __init__(self):
         pass
 
@@ -20,7 +20,7 @@ class Masterpass():
             f.close()
         print("\nSaving hash")
         
-
+    # create key for ciphering
     def keyForEncryption(self, password):
         salt = os.urandom(16)
         kdf = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32,
@@ -32,6 +32,7 @@ class Masterpass():
             f.write(key)
         print("Saving master key")
 
+    # prompt user to enter ps
     def createMaster(self):
         password = input("Enter password: ")
         password_check = input("Confirm password: ")
@@ -43,6 +44,7 @@ class Masterpass():
             print("Password do not match!")
             self.createMaster()
 
+    # prompt user to create ps
     def user(self):
         userchoice = input("Would you like to create a masterpassword? [y/n]: ")
 
@@ -56,15 +58,18 @@ class Masterpass():
             else:
                 pass
 
+    # check if key file is empty 
     def checkFile(self):
         check = os.stat('./keys.key').st_size
         return check
 
+    # delete content in key file
     def reset(self):
         with open('./keys.key', 'w') as f:
-            f.wrtie("")
+            f.write("")
             f.close() 
     
+    # check if inputted master ps is correct 
     def checker(self, password):
         with open('./keys.key', 'r+') as f:
             content = f.readlines()

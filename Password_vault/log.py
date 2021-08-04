@@ -1,7 +1,10 @@
+# import lib
 import os 
 
+# log class
 class Log:
     
+    # default constructor
     def __init__(self):
         pass
 
