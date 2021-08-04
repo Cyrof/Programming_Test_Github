@@ -14,8 +14,8 @@ def close_Tab():
         brower.switch_to.window(windows[0])
 
 #define username and password
-username = "****"
-password = "********"
+username = "cyrof"
+password = "B@sketba1l"
 
 #click sign in button 
 def click():
@@ -26,7 +26,7 @@ def click():
         print("No element found")
 
 #initialise browser and open 9anime.to
-brower = webdriver.Chrome()
+brower = webdriver.Chrome("A:\chromedriver\chromedriver_win32\chromedriver.exe")
 brower.get("https://9anime.to")
 
 #let code wait 5 second
