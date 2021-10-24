@@ -41,5 +41,3 @@ class Log:
     def reset(self):
         with open('./log.txt', 'w+') as f:
             f.write("")
-
-
